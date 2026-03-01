@@ -40,3 +40,76 @@ listRef.addEventListener("click", (e) => {
     renderArray()
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const nameRef = document.querySelector("#username")
+const passwordRef = document.querySelector("#password");
+const saveRef = document.querySelector("#saveBtn");
+
+saveRef.addEventListener("click", (event) => {
+    localStorage.clear()
+    event.preventDefault()
+    nameRef.value = ""
+    passwordRef.value = ""
+})
+
+nameRef.addEventListener("input", (event) => {
+    const inputName = event.target.value.trim()
+    localStorage.setItem("name", inputName)
+})
+
+
+passwordRef.addEventListener("input", (event) => {
+    const inputPassword = event.target.value.trim()
+    localStorage.setItem("password", inputPassword)
+})
+
+// localStorage.setItem("name", nameRef.value);
+// localStorage.setItem("password", passwordRef.value);
+
+function checkStorage (){
+    const getName = localStorage.getItem("name");
+    const getPassword = localStorage.getItem("password");
+    passwordRef.value = getPassword
+    nameRef.value = getName
+}
+
+checkStorage()
+
+
