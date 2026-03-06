@@ -3,20 +3,18 @@ const btnRef = document.querySelector("#addBookmarkBtn")
 const listRef = document.querySelector("#bookmarkList")
 
 
-const bookArray = []
+const bookArray = JSON.parse(localStorage.getItem("key")) || [];
 
 btnRef.addEventListener("click", () => {
-    const urlValue = inputRef.value.trim();
-    if(urlValue) {
-        bookArray.push(urlValue)
-        inputRef.value = ""
-        renderArray()
-    }
+  const urlValue = inputRef.value.trim();
+  
+  if (urlValue) {
+    bookArray.push(urlValue);
+    inputRef.value = "";
+    savedStorage(); 
+  }
+});
 
-
-    
-    
-})
 
 
 function renderArray () {
@@ -37,9 +35,15 @@ listRef.addEventListener("click", (e) => {
     }
     // console.log(target, index);
     bookArray.splice(index, 1)
-    renderArray()
+    savedStorage()
 })
 
+function savedStorage(){
+    localStorage.setItem("key", JSON.stringify(bookArray))
+    renderArray()
+}
+
+renderArray()
 
 
 
