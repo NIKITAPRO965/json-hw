@@ -1,49 +1,73 @@
-const inputRef = document.querySelector("#bookmarkInput")
-const btnRef = document.querySelector("#addBookmarkBtn")
-const listRef = document.querySelector("#bookmarkList")
+//Завдання "Зміна кольору": Створіть блок, який змінює свій фоновий колір кожні 3 секунди. Використовуйте setInterval для зміни кольору.
+// const boxRef = document.querySelector(".box")
+// const colors = ["blue", "yellow", "black", "red", "orange"]
+// let count =  0 
+// const id = setInterval(()=> {
+//     boxRef.style.background = colors[count]
+//     count += 1
+    
+//     if(count === colors.length) {
+//         count = 0
+//         boxRef.style.background = "orange"
+//         // clearInterval(id)
+//         // boxRef.style.background = "pink"
+//     }
+// }, 3000)
 
 
-const bookArray = JSON.parse(localStorage.getItem("key")) || [];
 
-btnRef.addEventListener("click", () => {
-  const urlValue = inputRef.value.trim();
-  
-  if (urlValue) {
-    bookArray.push(urlValue);
-    inputRef.value = "";
-    savedStorage(); 
-  }
+
+
+
+
+//Завдання "Зміна тексту": Створіть текст, який циклічно змінюється між кількома заданими значеннями. Використовуйте setInterval для зміни тексту кожні 2 секунди.
+
+// const textRef = document.querySelector(".text");
+// let count = 0;
+
+// function stringArray(text) {
+//   const string = text.split(" ");
+//   const id = setInterval(() => {
+//     textRef.textContent = string[count];
+//     count += 1;
+
+//     if (count > string.length) {
+//     count = 0
+//     clearInterval(id);
+//     textRef.textContent = "Текст закінчився"
+//     }
+//   }, 1000);
+// }
+
+// stringArray("Lorem ipsum dolor sit amet");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Створити повідомлення “Операція проведена успішно”. Це повідомлення повинно з’являтися при запуску скрипта (додаючи клас), зникати через 3000 мс та при кліку на нього. Не забуваємо чистити таймер після
+
+const spanRef = document.querySelector("span");
+spanRef.classList.add("text");
+setInterval(() => {
+  spanRef.classList.replace("text", "is-hidden");
+}, 3000);
+
+spanRef.addEventListener("click", () => {
+  spanRef.classList.replace("text", "is-hidden");
 });
 
 
 
-function renderArray () {
-    const item = bookArray.map((url, index) => {
-        return `<li>
-        <a href="${url}">${url}</a>
-        <button type="button" data-action="${index}">delete</button> 
-    </li>`
-    }).join("")
-    listRef.innerHTML = item
-}
-
-listRef.addEventListener("click", (e) => {
-    const target = e.target.nodeName
-    const index = e.target.dataset.action
-    if(target !== "BUTTON") {
-        return
-    }
-    // console.log(target, index);
-    bookArray.splice(index, 1)
-    savedStorage()
-})
-
-function savedStorage(){
-    localStorage.setItem("key", JSON.stringify(bookArray))
-    renderArray()
-}
-
-renderArray()
 
 
 
@@ -63,57 +87,5 @@ renderArray()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const nameRef = document.querySelector("#username")
-const passwordRef = document.querySelector("#password");
-const saveRef = document.querySelector("#saveBtn");
-
-saveRef.addEventListener("click", (event) => {
-    localStorage.clear()
-    event.preventDefault()
-    nameRef.value = ""
-    passwordRef.value = ""
-})
-
-nameRef.addEventListener("input", (event) => {
-    const inputName = event.target.value.trim()
-    localStorage.setItem("name", inputName)
-})
-
-
-passwordRef.addEventListener("input", (event) => {
-    const inputPassword = event.target.value.trim()
-    localStorage.setItem("password", inputPassword)
-})
-
-// localStorage.setItem("name", nameRef.value);
-// localStorage.setItem("password", passwordRef.value);
-
-function checkStorage (){
-    const getName = localStorage.getItem("name");
-    const getPassword = localStorage.getItem("password");
-    passwordRef.value = getPassword
-    nameRef.value = getName
-}
-
-checkStorage()
 
 
